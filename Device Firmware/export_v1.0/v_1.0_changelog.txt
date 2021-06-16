@@ -1,0 +1,23 @@
+change log:
+
+--------------- v_0.7 ----------------
+This version of the firmware is able to communicate with the base station by making availble services to do the following:
+	- Transfer data from the device to the application
+	- Service to display the current battery level (currently fixed at 100).
+
+
+--------------- v_0.8 ----------------
+Able to communicate between devices by reading and writing characteristics over BLE
+Implemented threading priorities to allow BLE and UWB to run simulatenously
+
+
+--------------- v_0.9 ----------------
+Able to stop and start UWB process
+Able to initiate ds_init and ds_rsp depending on command from BLE
+Able to save contact tracing data locally
+Able to transfer contact tracing information to mobile device
+
+
+--------------- v_1.0 ----------------
+Implemented privacy settings
+Updated exposure algorithm

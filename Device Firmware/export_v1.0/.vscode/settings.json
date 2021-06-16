@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "data_transfer.h": "c",
+        "scanning.h": "c"
+    }
+}
