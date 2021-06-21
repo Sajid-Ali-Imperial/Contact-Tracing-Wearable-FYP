@@ -2,7 +2,7 @@
 #include "random/rand32.h"
 #include "UWB/uwb_main.h"
 #include "BLE/ble_main.h"
-#include "I2C/accelerometer.h"
+#include "I2C/i2c_peripherals.h"
 #include "ContactData/contact_data.h"
 
 
@@ -36,16 +36,9 @@ int main(void)
     init_contact_data();
 
     k_thread_create(&threads[0], &thread_stacks[0][0], STACKSIZE, ble_thread, 0, 0, 0, 3, 0, 0);
-    //k_thread_create(&threads[1], &thread_stacks[1][0], STACKSIZE, uwb_main_thread, 0, 0, 0, 4, 0, 0);
-    //k_thread_create(&threads[2], &thread_stacks[2][0], STACKSIZE, acc_thread, 0, 0, 0, K_PRIO_COOP(4), 0, 0);
+    k_thread_create(&threads[1], &thread_stacks[1][0], STACKSIZE, uwb_main_thread, 0, 0, 0, 4, 0, 0);
+    k_thread_create(&threads[2], &thread_stacks[2][0], STACKSIZE, acc_thread, 0, 0, 0, 4, 0, 0);
     
-    // while(1)
-    // {
-    //     // rand_val = mask & sys_rand32_get();
-    //     // //rand_val = rand_val >> 23;
-    //     // printk("%u \n", rand_val);
-    //     // k_sleep(1000);
-    // }
 }
 
 

@@ -1,5 +1,34 @@
 #include "i2c_peripherals.h"
 
+/* Main Thread */
+void acc_thread(void *arg1, void *ard2, void *arg3)
+{
+	int err = init_acc();
+
+	if(err)
+	{
+		return;
+	}
+
+	while(1)
+	{
+		/* Get idle seconds from accelerometer */
+		read_acc(&idle_seconds);
+		/* Lock when accessing ble_idle_secs */
+		k_mutex_lock(&ble_idle_mutex, K_FOREVER);
+		if(acc_idle_secs > acc_thresh && ble_idle_secs > ble_thresh)
+		{
+		/* update power state */
+		state = LOW_POWER_MODE;
+		ble_stop();
+		device_set_power_state(cons, DEVICE_PM_OFF_STATE, NULL, NULL);
+		}
+		/* Unlock mutex */
+		k_mutex_unlock(&ble_idle_mutex);
+	}
+
+
+}
 
 /* 
 	******************************************
